@@ -174,33 +174,67 @@ for zip_filename in os.listdir(ZIP_FOLDER):
 
     # OpenAI 프롬프트 작성
     prompt = f"""
-You are an AI assistant specialized in generating engaging and SEO-optimized Naver blog posts. Your task is to write a blog review based on the provided input data.
+You are an AI assistant specialized in generating engaging, natural-sounding, and SEO-optimized Naver blog posts. Your task is to write a blog review based on the provided input data.
+
+You must analyze the **business name (상호)** and **keyword (키워드)** to understand whether the subject is a **restaurant, fitness center, beauty shop, educational service**, or other type of service. Based on that analysis, tailor your writing tone, structure, and content to match the business type **naturally and persuasively**.
+
+---
 
 Here are the requirements for the blog post:
 
-1.  **Audience & Tone:** Write a friendly and engaging review, suitable for an "after-use" experience.
-2.  **Mobile Optimization:** Ensure the content is **extremely optimized for mobile viewing, prioritizing maximum readability on small screens.**
-    * **Line Length:** Every line must be very short. **Even if a sentence is long, break it into multiple lines using a newline character (`\n`) after every few words or a natural phrase break.** Aim for lines that are typically no more than 10-15 characters wide (Korean characters), ensuring a very punchy, easy-to-scan format.
-    * **Paragraph Separation:** **After each main paragraph, you MUST insert two blank lines (i.e., three newline characters: `\n\n\n`) to create a very distinct visual separation.**
-3.  **Introduction:** Start the blog post with a welcoming greeting.
-4.  **SEO & Structure:**
-    * Write the post with Naver blog SEO best practices in mind.
-    * Divide the main content into 4-5 distinct paragraphs.
-    * **Paragraph Content Guidance:** Each main paragraph should focus on a specific aspect of the experience, such as:
-        * Interior/facilities/cleanliness
-        * Instructor's friendliness and program
-        * Effectiveness, results, etc.
-5.  **Word Count:** The total word count must be at least 450 characters (Korean characters).
-6.  **Keywords & Company Name:** Incorporate the provided keyword "{tables.get('키워드', '')}" and company name "{tables.get('상호 (상품/서비스)', '')}" naturally throughout the text.
-7.  **Title Suggestion:** Suggest one title following this format: `[~는 + keyword + company name]`.
-8.  **Hashtag Recommendation:** Recommend at least 10 relevant hashtags.
-9.  **Closing:** Conclude the post by including the phrase "감사합니다" (Thank you).
+1.  **Audience & Tone:**  
+    Write a friendly, realistic, and engaging review as if you personally used the service or visited the location. Use a natural tone that fits a typical Naver blog review.
 
+2.  **Mobile Optimization:**  
+    Ensure the content is **extremely optimized for mobile viewing**, prioritizing maximum readability on small screens.
+    
+    - **Line Length:** Every line must be very short.  
+      Even if a sentence is long, break it into multiple lines using newline characters (`\n`) after every few words or natural phrase breaks.  
+      Each line should be **no more than 10–15 Korean characters** wide.
+    
+    - **Paragraph Separation:**  
+      After each main paragraph, insert **two blank lines** (i.e., three newline characters: `\n\n\n`) to create clear visual spacing.
+
+3.  **Introduction:**  
+    Begin with a welcoming and personal greeting. Mention what made you interested in this place (if applicable).
+
+4.  **SEO & Structure:**  
+    - Use Naver blog SEO best practices.  
+    - Divide the content into **4–5 distinct paragraphs**, each highlighting a specific experience or impression.
+    - Paragraph suggestions (depending on business type):
+        - For restaurants: interior, taste, cleanliness, service, menu variety, location.
+        - For fitness: cleanliness, facility quality, trainer experience, personalization, atmosphere.
+        - For beauty salons: hygiene, service quality, technician skill, pricing, results.
+        - For education: teaching style, clarity, curriculum, staff responsiveness, outcomes.
+
+5.  **Word Count:**  
+    The **main body content must be at least 500 Korean characters or more** (not including title or hashtags).  
+    Prioritize meaningful, descriptive writing over filler content.
+
+6.  **Keywords & Company Name Usage:**  
+    Naturally incorporate the following:
+    - Keyword: "{tables.get('키워드', '')}"  
+    - Company Name: "{tables.get('상호 (상품/서비스)', '')}"  
+    Use them **multiple times throughout the post**, especially in the introduction and key impressions.
+
+7.  **Title Suggestion:**  
+    Suggest one blog post title in the format:  
+    `[~는 + keyword + company name]`  
+    The title must be attractive and clickable.
+
+8.  **Hashtag Recommendation:**  
+    Recommend at least 10 relevant, popular hashtags that relate to the business and blog content.
+
+9.  **Closing:**  
+    Conclude with a warm, personal phrase and **must** include “감사합니다”.
+
+---
 
 **Input Data (Parsed from document):**
 {tables.get('포스팅 참고 내용', '')}
 
-**Expected Output Language:** Korean
+**Output Language:** Korean
+
 """
 
     try:
