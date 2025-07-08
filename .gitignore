@@ -10,3 +10,5 @@ __pycache__/
 documents/
 
 result/
+
+.DS_store
