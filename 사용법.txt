@@ -1,0 +1,6 @@
+아래 명령어 그대로 치면 됨
+- python -m venv venv
+
+- venv\Scripts\activate 
+
+-python app.py (안되면 python3 app.py)
