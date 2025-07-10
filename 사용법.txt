@@ -3,4 +3,10 @@
 
 - venv\Scripts\activate 
 
+위에 두개는 제일 처음에만
+
+그 다음에 zip 파일들을 documents에 넣고
+
 -python app.py (안되면 python3 app.py)
+
+그러면 result 폴더 안에 각 폴더 압축 해제 및 gpt 돌린 result.txt 파일 생성
